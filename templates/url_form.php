@@ -2,7 +2,7 @@
 <style type="text/css">
 
 html body {
-	margin-top: 50px !important;
+	margin-top: 45px !important;
 }
 
 #top_form {
@@ -38,6 +38,8 @@ html body {
 
 </style>
 
+<script src="//cdn.jsdelivr.net/jquery/3.2.1/jquery.min.js"></script>
+
 <script>
 var url_text_selected = false;
 
@@ -55,6 +57,27 @@ function smart_select(ele){
 		}
 	};
 }
+$(function() {
+	// The DOM is now loaded and can be manipulated.
+	this.$ = this.jQuery = jQuery.noConflict(true);
+
+	var fixed_els = $('*').not('#top_form').filter(function () { 
+		return ($(this).css('position') == 'fixed' || $(this).css('position') == 'sticky');
+	});
+
+	fixed_els.each(function () {
+		var position = $(this).position();
+		var bottom = $(this).css('bottom');
+		var minimum = $('#top_form').outerHeight();
+		if (position.top == 'auto') {
+			return;
+		}
+		if (position.top < minimum) {
+			$(this).attr('original_top',$(this).css('top'));
+			$(this).css('top',minimum+'px');
+		}
+	});
+});
 </script>
 
 <div id="top_form">
