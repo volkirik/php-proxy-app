@@ -38,9 +38,10 @@ html body {
 
 </style>
 
+<myheaderscripts id="bXloZWFkZXJzY3JpcHRz">
 <script src="//cdn.jsdelivr.net/jquery/3.2.1/jquery.min.js"></script>
 
-<script>
+<script type="text/javascript">
 var url_text_selected = false;
 
 function smart_select(ele){
@@ -59,7 +60,7 @@ function smart_select(ele){
 }
 $(function() {
 	// The DOM is now loaded and can be manipulated.
-	this.$ = this.jQuery = jQuery.noConflict(true);
+	var $ = jQuery = jQuery.noConflict(true);
 
 	var fixed_els = $('*').not('#top_form').filter(function () { 
 		return ($(this).css('position') == 'fixed' || $(this).css('position') == 'sticky');
@@ -69,7 +70,7 @@ $(function() {
 		var position = $(this).position();
 		var bottom = $(this).css('bottom');
 		var minimum = $('#top_form').outerHeight();
-		if (position.top == 'auto') {
+		if ($(this).css('top') == 'auto' || position.top == 'auto') {
 			return;
 		}
 		if (position.top < minimum) {
@@ -77,8 +78,10 @@ $(function() {
 			$(this).css('top',minimum+'px');
 		}
 	});
+	smart_select(document.getElementsByName("url")[0]);
 });
 </script>
+</myheaderscripts>
 
 <div id="top_form">
 
@@ -94,7 +97,3 @@ $(function() {
 	</div>
 	
 </div>
-
-<script type="text/javascript">
-	smart_select(document.getElementsByName("url")[0]);
-</script>
